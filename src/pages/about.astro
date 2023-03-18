@@ -1,11 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
+const content = "abc";
 ---
 
 <Layout title="About">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
     <h1>About</h1>
+    <p>{content}</p>
     <ul>
         <li>
             <a href="/posts/post1/">Post 1</a>
