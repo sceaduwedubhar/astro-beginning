@@ -1,10 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 const allPost = await Astro.glob("./posts/*.md");
 const content = "abc";
 ---
 
-<Layout title="About">
+<BaseLayout title="About">
     <h1>About</h1>
     <p>{content}</p>
     <ul>
@@ -16,4 +16,4 @@ const content = "abc";
             ))
         }
     </ul>
-</Layout>
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+import Link from "./Link.astro";
+
+const links = [
+    {
+        icon: "",
+        name: "About",
+        href: "/about",
+    },
+    {
+        icon: "",
+        name: "Tags",
+        href: "/tags",
+    },
+];
+---
+
+<div class="flex gap-2 items-center justify-between p-2 bg-gray-300">
+    <Link css="p-1 pl-3 text-2xl" href="/">
+        <i class="fa-solid fa-house"> </i>
+    </Link>
+    <div class="flex gap-2">
+        {
+            links.map((link) => (
+                <Link css="p-1 text-2xl hover:text-white" href={link.href}>
+                    <Fragment set:html={link.icon} />
+                    {link.name}
+                </Link>
+            ))
+        }
+    </div>
+</div>

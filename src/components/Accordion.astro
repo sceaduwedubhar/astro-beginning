@@ -1,0 +1,39 @@
+<div>
+    <div class="title border rounded"><slot name="title" /></div>
+    <div class:list={["content border rounded overflow-hidden h-0"]}>
+        <slot name="content" />
+    </div>
+</div>
+<script>
+    function isOpen() {
+        const content = document.querySelector("div.content");
+        return content!.classList.contains("is-active");
+    }
+
+    function openAccordion() {
+        console.log("open");
+        const content = document.querySelector("div.content");
+        content!.classList.add("is-active");
+        content!.style.height = "2rem";
+    }
+
+    function closeAccordion() {
+        console.log("close");
+        const content = document.querySelector("div.content");
+        content!.classList.remove("is-active");
+        content!.style.height = 0;
+    }
+
+    const titles = document.querySelectorAll("div.title");
+    const contents = document.querySelectorAll("div.content");
+    titles.forEach((element, idx) => {
+        element.setAttribute("id", `title-${idx}`);
+    });
+    contents.forEach((element, idx) => {
+        element.setAttribute("id", `content-${idx}`);
+    });
+    document.addEventListener("click", (e) => {
+        console.log(isOpen());
+        isOpen() ? closeAccordion() : openAccordion();
+    });
+</script>

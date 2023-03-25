@@ -1,0 +1,41 @@
+---
+import Link from "./Link.astro";
+interface Props {
+    menuList: MenuProps[];
+}
+
+interface MenuProps {
+    title: string;
+    href?: string;
+    subMenuItems?: (Pick<MenuProps, "title"> & Required<Pick<MenuProps, "href">>)[];
+}
+const { menuList } = Astro.props;
+---
+
+<div class="flex flex-col">
+    {
+        menuList.map((item) => (
+            <div class="p-1">
+                {item.href ? (
+                    <Link href={item.href} css="hover:text-white">
+                        {item.title}
+                    </Link>
+                ) : (
+                    <div>{item.title}</div>
+                )}
+
+                {item.subMenuItems ? (
+                    <ul class="pl-3">
+                        {item.subMenuItems.map((subItem) => (
+                            <li>
+                                <Link href={subItem.href} css="hover:text-white">
+                                    {subItem.title}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                ) : null}
+            </div>
+        ))
+    }
+</div>
