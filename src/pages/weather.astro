@@ -1,13 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { WeatherPreact } from "../components/WeatherPreact";
 import { WeatherReact } from "../components/WeatherReact";
 ---
 
 <BaseLayout title="weather">
     <div>Weather</div>
     <div class="grid grid-cols-3 gap-2">
-        <WeatherPreact client:load />
         <WeatherReact client:load />
     </div>
 </BaseLayout>
