@@ -14,8 +14,9 @@ export function SearchBarReact() {
     }
 
     async function onSubmit() {
-        const res = await fetch(`https://api.syosetu.com/novelapi/api/?out=json&title=${search}`);
-        console.log(res);
+        const res = await fetch(`/novelapi?of=n-t&out=json&word=${search}`);
+        const json = await res.json();
+        console.log(json);
     }
 
     return (
