@@ -8,7 +8,7 @@ export function SearchBarReact() {
     }
 
     async function onEnterPressHandler(e: React.KeyboardEvent<HTMLInputElement>) {
-        if (e.key == "enter") {
+        if (e.key == "Enter") {
             await onSubmit();
         }
     }
