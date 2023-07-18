@@ -1,2 +1,3 @@
 /novelapi/* https://api.syosetu.com/novelapi/api/:splat 404
+/* / 200
 /\* / 404
