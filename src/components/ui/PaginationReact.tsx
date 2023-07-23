@@ -6,6 +6,10 @@ export function PaginationReact({ total, emitFn }: { total: number; emitFn: Func
     const [end, useEnd] = useState(false);
 
     useEffect(() => {
+        useCurrent(1);
+    }, [total]);
+
+    useEffect(() => {
         useFirst(false);
         useEnd(false);
         if (current <= 1) {
