@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function SearchBarReact() {
+export function SearchBarReact({ emitFn }: { emitFn: Function }) {
     const [search, useSearch] = useState("");
 
     function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -9,14 +9,8 @@ export function SearchBarReact() {
 
     async function onEnterPressHandler(e: React.KeyboardEvent<HTMLInputElement>) {
         if (e.key == "Enter") {
-            await onSubmit();
+            emitFn(search);
         }
-    }
-
-    async function onSubmit() {
-        const res = await fetch(`/novelapi?of=n-t&out=json&word=${search}`);
-        const json = await res.json();
-        console.log(json);
     }
 
     return (
@@ -27,7 +21,7 @@ export function SearchBarReact() {
                 onChange={onChangeHandler}
                 onKeyDown={onEnterPressHandler}
             />
-            <button className="border bg-gray-200 p-1 rounded-lg" onClick={onSubmit}>
+            <button className="border bg-gray-200 p-1 rounded-lg" onClick={() => emitFn(search)}>
                 Search
             </button>
         </div>
