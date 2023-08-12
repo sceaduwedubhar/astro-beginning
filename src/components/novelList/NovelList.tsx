@@ -19,10 +19,14 @@ export function NovelList() {
             return;
         }
         const novelJSON = JSON.parse(novel);
-        const ncodeStr = Array.isArray(novelJSON) ? novelJSON.reduce((acc, curr) => `${curr["ncode"]}-${acc}`, "") : "";
+        const ncodeStr =
+            Array.isArray(novelJSON) && novelJSON.length > 0
+                ? novelJSON.reduce((acc, curr) => `${curr["ncode"]}-${acc}`, "")
+                : "";
         const controller = new AbortController();
         const signal = controller.signal;
-        fetch(`/novelapi?of=t-w-gl-ga-e&out=json&ncode=${ncodeStr}`, {
+        console.log(ncodeStr);
+        fetch(`/novelapi?of=n-t-w-gl-ga-e&out=json&ncode=${ncodeStr}`, {
             signal: signal,
         })
             .then((res) => res.json())
@@ -54,6 +58,12 @@ export function NovelList() {
         return () => controller.abort();
     }, [searchText, page]);
 
+    useEffect(() => {
+        console.log(novelList);
+        const list = novelList.map((v) => ({ ncode: v.ncode, last_update: v.general_lastup }));
+        localStorage.setItem("novel", JSON.stringify(list));
+    }, [novelList]);
+
     function addNovel(novel: NovelData) {
         const found = novelList.find((ele) => ele.ncode === novel.ncode);
         if (found) {
@@ -62,12 +72,14 @@ export function NovelList() {
         useNovelList((prev) => [...prev, novel]);
     }
 
-    function removeNovel() {}
+    function removeNovel(ncode: string) {
+        useNovelList((prev) => prev.filter((v) => v.ncode !== ncode));
+    }
 
     return (
         <div className="flex flex-col gap-2">
             <SearchBarReact emitFn={(text: string) => useSearchText(text)}></SearchBarReact>
-            <NovelShelf data={novelList} />
+            <NovelShelf data={novelList} removeFn={removeNovel} />
             <NovelTable
                 pagination={
                     <PaginationReact

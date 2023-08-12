@@ -10,9 +10,10 @@ export function NovelTable({
     data: NovelData[];
     addFn: Function;
 }) {
+    console.log(data);
     return (
         <div className="flex flex-col gap-1 p-2">
-            {pagination}
+            {data.length > 0 && pagination}
             {data.map((v) => (
                 <div className="grid">
                     <NovelCard

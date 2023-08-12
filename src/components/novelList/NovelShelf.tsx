@@ -1,6 +1,6 @@
 import { STATE, type NovelData } from "./type";
 
-export function NovelShelf({ data }: { data: NovelData[] }) {
+export function NovelShelf({ data, removeFn }: { data: NovelData[]; removeFn: Function }) {
     return (
         <div className="grid grid-cols-3 gap-1">
             {data.map((v: NovelData) => (
@@ -12,6 +12,9 @@ export function NovelShelf({ data }: { data: NovelData[] }) {
                         <div>Total Chapters:{v.general_all_no}</div>
                     </div>
                     <div>Last update: {v.general_lastup}</div>
+                    <button className="hover:bg-gray-400 rounded-lg" onClick={() => removeFn(v.ncode)}>
+                        Remove
+                    </button>
                 </div>
             ))}
         </div>
