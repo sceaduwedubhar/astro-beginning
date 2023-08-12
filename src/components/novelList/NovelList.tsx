@@ -19,13 +19,14 @@ export function NovelList() {
             return;
         }
         const novelJSON = JSON.parse(novel);
-        const ncodeStr =
-            Array.isArray(novelJSON) && novelJSON.length > 0
-                ? novelJSON.reduce((acc, curr) => `${curr["ncode"]}-${acc}`, "")
-                : "";
+        const ncodeStr = Array.isArray(novelJSON) ? novelJSON.map((v) => v.ncode).join("-") : "";
+
+        if (!ncodeStr) {
+            return;
+        }
         const controller = new AbortController();
         const signal = controller.signal;
-        console.log(ncodeStr);
+
         fetch(`/novelapi?of=n-t-w-gl-ga-e&out=json&ncode=${ncodeStr}`, {
             signal: signal,
         })
