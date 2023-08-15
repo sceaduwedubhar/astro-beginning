@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { SearchBarReact } from "./SearchBarReact";
 import { PaginationReact } from "../ui/PaginationReact";
-import { NovelCard } from "./NovelCard";
-import type { NovelData } from "./type";
-import { NovelTable } from "./NovelTable";
 import { NovelShelf } from "./NovelShelf";
+import { NovelTable } from "./NovelTable";
+import { SearchBarReact } from "./SearchBarReact";
+import type { NovelData } from "./type";
 
 export function NovelList() {
     const [total, useTotal] = useState(0);
