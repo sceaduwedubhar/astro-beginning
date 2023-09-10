@@ -59,6 +59,7 @@ export function NovelList() {
     }, [searchText, page]);
 
     useEffect(() => {
+        if (!novelList.length) return;
         console.log(novelList);
         const list = novelList.map((v) => ({ ncode: v.ncode, last_update: v.general_lastup }));
         localStorage.setItem("novel", JSON.stringify(list));
