@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PaginationReact } from "../ui/PaginationReact";
 import { NovelShelf } from "./NovelShelf";
 import { NovelTable } from "./NovelTable";
@@ -11,6 +11,7 @@ export function NovelList() {
     const [searchText, useSearchText] = useState("");
     const [page, usePage] = useState(1);
     const [novelList, useNovelList] = useState<NovelData[]>([]);
+    const first = useRef(true);
 
     useEffect(() => {
         const novel = localStorage.getItem("novel");
@@ -59,7 +60,10 @@ export function NovelList() {
     }, [searchText, page]);
 
     useEffect(() => {
-        if (!novelList.length) return;
+        if (first.current) {
+            first.current = false;
+            return;
+        }
         console.log(novelList);
         const list = novelList.map((v) => ({ ncode: v.ncode, last_update: v.general_lastup }));
         localStorage.setItem("novel", JSON.stringify(list));
